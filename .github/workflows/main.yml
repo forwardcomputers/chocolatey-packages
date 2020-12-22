@@ -19,4 +19,5 @@ jobs:
         shell: pwsh
         run: |
           Install-Module au -Confirm:$false -Force
+          dir
           .\updateall_all.ps1
