@@ -19,11 +19,15 @@ function global:au_GetLatest {
 
 function global:au_SearchReplace {
     @{
-       'tools\chocolateyInstall.ps1' = @{
-        "(^[$]version\s*=\s*)('.*')"        = "`$1'$($Latest.Version)'"
-        "(?i)(^\s*url64bit\s*=\s*)('.*')"   = "`$1'$($Latest.URL64)'"
-        "(?i)(^\s*checksum64\s*=\s*)('.*')" = "`$1'$($Latest.Checksum64)'"
-       } 
+       ".\tools\chocolateyInstall.ps1"      = @{
+        "(^[$]version\s*=\s*)('.*')"        = "`${1} $($Latest.Version)"
+        "(?i)(^\s*url64bit\s*=\s*)('.*')"   = "`${1} $($Latest.URL64)"
+        "(?i)(^\s*checksum64\s*=\s*)('.*')" = "`${1} $($Latest.Checksum64)"
+       }
+       ".\tools\VERIFICATION.txt"           = @{
+        "(?i)(\s+x64:).*"                   = "`${1} $($Latest.URL64)"
+        "(?i)(checksum64:).*"               = "`${1} $($Latest.Checksum64)"
+       }
     }
  }
 

@@ -14,8 +14,8 @@ function global:au_GetLatest {
 
 function global:au_SearchReplace {
     @{
-       'tools\chocolateyInstall.ps1' = @{
-        "(^[$]version\s*=\s*)('.*')"    = "`$1'$($Latest.Version)'"
+       "tools\chocolateyInstall.ps1"        = @{
+        "(^[$]version\s*=\s*)('.*')"        = "`${1} $($Latest.Version)"
        } 
     }
  }
