@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+  schedule:
+    # Times are in UTC, this job is run daily @ 10HRS = 5AM EST
+    - cron: "0 10 * * *"
+
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: '4.8'
+  NUGET_VERSION: '2.8.5.201'
+
+jobs:
+  updateall:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Install .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '${{ env.DOTNET_VERSION}}'
+      - name: run update_all
+        run: |
+          Install-PackageProvider -Confirm:$false -Force -MinimumVersion 2.8.5.201 -Name NuGet
+          Install-Module au -Confirm:$false -Force
+          .\updateall_all.ps1
