@@ -15,10 +15,12 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+      - name: strong crypto
+        shell: pwsh
+        run: Set-ItemProperty -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type DWord
       - name: run update_all
         shell: pwsh
         run: |
-          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
           Install-PackageProvider -Confirm:$false -Force -MinimumVersion 2.8.5.201 -Name NuGet
           Install-Module au -Confirm:$false -Force
           .\updateall_all.ps1
