@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if "Ω" doesn't appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <!-- == PACKAGE SPECIFIC SECTION == -->
+    <id>touchportal</id>
+    <version>2.2.005</version>
+    <owners>forwardcomputers</owners>
+    <!-- == SOFTWARE SPECIFIC SECTION == -->
+    <title>Touch Portal</title>
+    <authors>Touch Portal</authors>
+    <projectUrl>https://www.touch-portal.com</projectUrl>
+    <iconUrl>https://www.touch-portal.com/press/icon/Logo2020_512px.png</iconUrl>
+    <copyright>2020</copyright>
+    <licenseUrl>https://www.touch-portal.com</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <projectSourceUrl>https://www.touch-portal.com</projectSourceUrl>
+    <docsUrl>https://www.touch-portal.com/blog/post/tutorials/get_started_with_touch_portal.php</docsUrl>
+    <mailingListUrl>https://discord.gg/MgxQb8r</mailingListUrl>
+    <bugTrackerUrl>https://discord.gg/MgxQb8r</bugTrackerUrl>
+    <tags>touchportal touch-portal stream deck</tags>
+    <summary>Touch Portal is a companion app to control a PC or a Mac by using a deck of buttons.</summary>
+    <description>Touch Portal is a companion app to remote control a PC or a Mac by using a deck of macro buttons to improve the workflow and productivity of game streamers, content creators and professionals.</description>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
