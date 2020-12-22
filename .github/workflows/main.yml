@@ -20,3 +20,13 @@ jobs:
         run: |
           Install-Module au -Confirm:$false -Force
           .\update_all.ps1
+          if ( ! ( Select-String -Path .\Update-AUPackages.md -Pattern "0 updated," ) ) {
+            $paramsSendMailmessage = @{
+              SmtpServer = "filer"
+              From       = "taskscheduler@home.mustakim.com"
+              To         = "alim@forwardcomputers.com"
+              Subject    = "From GITHUB"
+              Body       = "Chocolatey local packages updated"
+              }
+            Send-MailMessage @paramsSendMailmessage
+          }
