@@ -16,7 +16,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: run update_all
-        shell: pwsh
+        shell: powershell
         run: |
           Install-Module au -Confirm:$false -Force
           .\update_all.ps1
