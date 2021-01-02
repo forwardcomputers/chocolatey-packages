@@ -29,4 +29,5 @@ jobs:
               Body       = "Chocolatey local packages updated"
               }
             Send-MailMessage @paramsSendMailmessage
+            .\update_readme.ps1
           }
