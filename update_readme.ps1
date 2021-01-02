@@ -2,7 +2,7 @@
 $content = Get-Content Update-AUPackages.md
 
 $timeUCT = ($content | Select-String -Pattern '^\**UTC\**: (.*?) \[').Matches.Groups[1].Value + "Z"
-$timeEST = [TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date -Date $t),'Eastern Standard Time').ToString('dd--MM--yyyy_hh:mm:ss_tt')
+$timeEST = [TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date -Date $timeUCT),'Eastern Standard Time').ToString('dd--MM--yyyy_hh:mm:ss_tt')
 
 $anchors = $content |
 Select-String -Pattern '^\s*\|<img src(.*?)\/>\|\[(.*?)\].*\[(.*?)\]' |
