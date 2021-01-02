@@ -46,6 +46,8 @@ $Options = [ordered]@{
         Path    = "$PSScriptRoot\update_info.xml"           #Path where to save the run info
     }
 
+    . $PSScriptRoot/update_readme.ps1
+
     Mail = if ($Env:mail_user) {
             @{
                 To         = $Env:mail_user
@@ -77,5 +79,3 @@ $global:info = updateall -Name $Name -Options $Options
 
 #Uncomment to fail the build on AppVeyor on any package error
 #if ($global:info.error_count.total) { throw 'Errors during update' }
-
-. $PSScriptRoot/update_readme.ps1
