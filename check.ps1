@@ -17,7 +17,7 @@ Remove-Item $tmp.FullName -Force
 Pop-Location
 $paramsSendMailmessage = @{
   SmtpServer = "filer"
-  From       = "taskscheduler@$_domainname"
+  From       = "$_dnsname@$_domainname"
   To         = "alim@forwardcomputers.com"
   Subject    = "From $_dnsname"
   Body       = "$_body"
