@@ -7,7 +7,7 @@ Package can be verified like this:
 
 1. Go to
 
-   x64: https://github.com/standardnotes/desktop/releases/download/v3.5.11/standard-notes-3.5.11-win.exe
+   x64: https://github.com/standardnotes/desktop/releases/download/v3.6.4/standard-notes-3.6.4-win.exe
 
    to download the installer.
 
@@ -15,5 +15,5 @@ Package can be verified like this:
    - Use powershell function 'Get-FileHash'
    - Use Chocolatey utility 'checksum.exe'
 
-   checksum64: f1a1765a92bee26c517f1bf77f5a93cc2e2f9b9431e86dfa124dcfc748057f88
+   checksum64: b1c405173993a20fc8075fd2128d0cf847c3c89259c68c1c1c37ae325e55073e
 
