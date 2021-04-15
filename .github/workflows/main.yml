@@ -30,8 +30,13 @@ jobs:
             $oauth_consumer_secret = "$env:env_consumer_secret"
             $oauth_token = "$env:env_token"
             $oauth_token_secret = "$env:env_token_secret"
-            Write-Host $oauth_consumer_key
-            Write-Output $oauth_consumer_key
+            Write-Host "Hos Key = $oauth_consumer_key"
+            Write-Output "Out Key = $oauth_consumer_key"
+            Write-Debug "Deb Key = $oauth_consumer_key"
+            Write-Information "Info Key = $oauth_consumer_key"
+            Write-Error "Err Key = $oauth_consumer_key"
+            Write-Warning "War Key = $oauth_consumer_key"
+            Write-Versnose "Ver Key = $oauth_consumer_key"
             $tweet_message = 'Chocolatey local packages updated'
             $http_endpoint = 'https://api.twitter.com/1.1/statuses/update.json'
             $oauth_nonce = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes([System.DateTime]::Now.Ticks.ToString()))
