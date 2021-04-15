@@ -18,14 +18,18 @@ jobs:
       - name: run update_all
         shell: powershell
         env:
-          $oauth_consumer_key: ${{ secrets.LP_T_CONSUMER_KEY }}
-          $oauth_consumer_secret: ${{ secrets.LP_T_CONSUMER_SECRET }}
-          $oauth_token: ${{ secrets.LP_T_OAUTH_TOKEN }}
-          $oauth_token_secret: ${{ secrets.LP_T_OAUTH_SECRET }}
+          env_consumer_key: ${{ secrets.LP_T_CONSUMER_KEY }}
+          env_consumer_secret: ${{ secrets.LP_T_CONSUMER_SECRET }}
+          env_token: ${{ secrets.LP_T_OAUTH_TOKEN }}
+          env_token_secret: ${{ secrets.LP_T_OAUTH_SECRET }}
         run: |
           Install-Module au -Confirm:$false -Force
           .\update_all.ps1
           if ( ! ( Select-String -Path .\Update-AUPackages.md -Pattern "0 updated," ) ) {
+            $oauth_consumer_key: "$env:env_consumer_key"
+            $oauth_consumer_secret: "$env:env_consumer_secret"
+            $oauth_token: "$env:env_token"
+            $oauth_token_secret: "$env:env_token_secret"
             Write-Host $oauth_consumer_key
             Write-Output $oauth_consumer_key
             $tweet_message = 'Chocolatey local packages updated'
