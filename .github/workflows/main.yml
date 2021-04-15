@@ -17,17 +17,46 @@ jobs:
         uses: actions/checkout@v2
       - name: run update_all
         shell: powershell
+        env:
+          $oauth_consumer_key: ${{ secrets.LP_T_CONSUMER_KEY }}
+          $oauth_consumer_secret: ${{ secrets.LP_T_CONSUMER_SECRET }}
+          $oauth_token: ${{ secrets.LP_T_OAUTH_TOKEN }}
+          $oauth_token_secret: ${{ secrets.LP_T_OAUTH_SECRET }}
         run: |
           Install-Module au -Confirm:$false -Force
           .\update_all.ps1
           if ( ! ( Select-String -Path .\Update-AUPackages.md -Pattern "0 updated," ) ) {
-            $paramsSendMailmessage = @{
-              SmtpServer = "filer"
-              From       = "taskscheduler@home.mustakim.com"
-              To         = "alim@forwardcomputers.com"
-              Subject    = "From GITHUB"
-              Body       = "Chocolatey local packages updated"
-              }
-            Send-MailMessage @paramsSendMailmessage
+            $tweet_message = 'Chocolatey local packages updated'
+            $http_endpoint = 'https://api.twitter.com/1.1/statuses/update.json'
+            $oauth_nonce = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes([System.DateTime]::Now.Ticks.ToString()))
+            $oauth_epochtime = [System.DateTime]::UtcNow - [System.DateTime]::ParseExact("01/01/1970", "dd/MM/yyyy", $null)
+            $oauth_timestamp = [System.Convert]::ToInt64($oauth_epochtime.TotalSeconds).ToString()
+            $signature_base = "$([System.Uri]::EscapeDataString($http_endpoint))&"
+            $signature_params = @{
+                'oauth_consumer_key' = $oauth_consumer_key;
+                'oauth_nonce' = $oauth_nonce;
+                'oauth_signature_method' = 'HMAC-SHA1';
+                'oauth_timestamp' = $oauth_timestamp;
+                'oauth_token' = $oauth_token;
+                'oauth_version' = '1.0';
+            }
+            $signature_params.status = $tweet_message
+            $signature_params.GetEnumerator() | sort name | foreach { $signature_base += [System.Uri]::EscapeDataString("$($_.Key)=$($_.Value)&".Replace(',','%2C').Replace('!','%21')) }
+            $signature_base = $signature_base.TrimEnd('%26')
+            $signature_base = 'POST&' + $signature_base
+            $signature_key = [System.Uri]::EscapeDataString($oauth_consumer_secret) + "&" + [System.Uri]::EscapeDataString($oauth_token_secret)
+            $hmacsha1 = new-object System.Security.Cryptography.HMACSHA1;
+            $hmacsha1.Key = [System.Text.Encoding]::ASCII.GetBytes($signature_key);
+            $oauth_signature = [System.Convert]::ToBase64String($hmacsha1.ComputeHash([System.Text.Encoding]::ASCII.GetBytes($signature_base)))
+            $oauth_auth_params = $signature_params
+            $oauth_auth_params.Add('oauth_signature', $oauth_signature)
+            $oauth_auth_params.Remove('status')
+            $oauth_auth_params.Remove('text')
+            $oauth_auth_params.Remove('screen_name')
+            $oauth_auth_string = 'OAuth '
+            $oauth_auth_params.GetEnumerator() | sort name | foreach { $oauth_auth_string += $_.Key + '="' + [System.Uri]::EscapeDataString($_.Value) + '", ' }
+            $oauth_auth_string = $oauth_auth_string.TrimEnd(', ')
+            $tweet_body = "status=$tweet_message"
+            Invoke-RestMethod -URI $http_endpoint -Method Post -Body $tweet_body -Headers @{ 'Authorization' = $oauth_auth_string } -ContentType "application/x-www-form-urlencoded"
             .\update_readme.ps1
           }
