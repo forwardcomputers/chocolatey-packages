@@ -26,6 +26,8 @@ jobs:
           Install-Module au -Confirm:$false -Force
           .\update_all.ps1
           if ( ! ( Select-String -Path .\Update-AUPackages.md -Pattern "0 updated," ) ) {
+            Write-Host $oauth_consumer_key
+            Write-Output $oauth_consumer_key
             $tweet_message = 'Chocolatey local packages updated'
             $http_endpoint = 'https://api.twitter.com/1.1/statuses/update.json'
             $oauth_nonce = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes([System.DateTime]::Now.Ticks.ToString()))
