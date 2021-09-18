@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if "Ω" doesn't appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <!-- == PACKAGE SPECIFIC SECTION == -->
+    <id>sharemouse</id>
+    <version>5.0.49</version>
+    <packageSourceUrl>https://github.com/forwardcomputers/Chocolatey-packages/tree/master/automatic/sharemouse</packageSourceUrl>
+    <owners>forwardcomputers</owners>
+    <!-- == SOFTWARE SPECIFIC SECTION == -->
+    <title>ShareMouse</title>
+    <authors>Bartels Media GmbH</authors>
+    <projectUrl>https://www.sharemouse.com/</projectUrl>
+    <iconUrl>https://www.sharemouse.com/site/assets/files/1094/android-icon-192x192_1.192x0.png</iconUrl>
+    <!-- <copyright>Year Software Vendor</copyright> -->
+    <licenseUrl>https://www.bartelsmedia.com/terms/</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <docsUrl>https://www.sharemouse.com/doc/</docsUrl>
+    <mailingListUrl>https://www.sharemouse.com/support/</mailingListUrl>
+    <bugTrackerUrl>https://www.sharemouse.com/support/</bugTrackerUrl>
+    <tags>sharemouse mouse share admin</tags>
+    <summary>The software "ShareMouse" lets you control multiple computers from a single mouse and keyboard.</summary>
+    <description>Move the mouse to the monitor of the computer you wish to control and the pointer magically jumps to that computer. Any mouse and keyboard input is transmitted to the corresponding computer.
+Similar to a network KVM, ShareMouse transmits mouse movements and clicks through the local LAN. All traffic can be password-protected and AES encrypted.
+To switch between computers, there is no additional hardware or press of a button required.
+Similar to a keyboard switch, you can seamlessly operate multiple computers on your desk from any mouse and keyboard.</description>
+    <releaseNotes>https://www.sharemouse.com/download/changelog/</releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

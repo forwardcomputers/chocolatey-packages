@@ -4,7 +4,7 @@
   <metadata>
     <!-- == PACKAGE SPECIFIC SECTION == -->
     <id>standardnotes</id>
-    <version>3.6.4</version>
+    <version>3.8.21</version>
     <packageSourceUrl>https://github.com/forwardcomputers/Chocolatey-packages/tree/master/automatic/standardnotes</packageSourceUrl>
     <owners>forwardcomputers</owners>
     <!-- == SOFTWARE SPECIFIC SECTION == -->
