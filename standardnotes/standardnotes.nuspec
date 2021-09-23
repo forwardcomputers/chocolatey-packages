@@ -5,7 +5,7 @@
     <!-- == PACKAGE SPECIFIC SECTION == -->
     <id>standardnotes</id>
     <version>3.8.21</version>
-    <packageSourceUrl>https://github.com/forwardcomputers/Chocolatey-packages/tree/master/automatic/standardnotes</packageSourceUrl>
+    <packageSourceUrl>https://github.com/forwardcomputers/Chocolatey-packages/tree/main/automatic/standardnotes</packageSourceUrl>
     <owners>forwardcomputers</owners>
     <!-- == SOFTWARE SPECIFIC SECTION == -->
     <title>Standard Notes</title>

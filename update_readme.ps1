@@ -24,6 +24,6 @@ $linesToWrite = @"
 Set-Content -Encoding ASCII -Force -Path README.md -Value $linesToWrite
 
 ForEach($anchor in $anchors) {
-    $linesToWrite = "| [![](https://img.shields.io/badge/$($anchor.Name)-grey.svg)](https://github.com/forwardcomputers/chocolatey-packages/tree/master/automatic/$($anchor.Name)) | ![](https://img.shields.io/badge/$($timeEST)-blue.svg) | [![](https://img.shields.io/badge/github--grey.svg?label=&logo=github&logoColor=white)](https://github.com/forwardcomputers/chocolatey-packages/tree/master/automatic/$($anchor.Name)) | | [![](https://img.shields.io/badge/v$($anchor.Version)-blue.svg)](https://github.com/forwardcomputers/chocolatey-packages/tree/master/automatic/$($anchor.Name))"
+    $linesToWrite = "| [![](https://img.shields.io/badge/$($anchor.Name)-grey.svg)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/automatic/$($anchor.Name)) | ![](https://img.shields.io/badge/$($timeEST)-blue.svg) | [![](https://img.shields.io/badge/github--grey.svg?label=&logo=github&logoColor=white)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/automatic/$($anchor.Name)) | | [![](https://img.shields.io/badge/v$($anchor.Version)-blue.svg)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/automatic/$($anchor.Name))"
     Add-Content -Encoding ASCII -Force -Path README.md -Value $linesToWrite
 }
