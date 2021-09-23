@@ -27,6 +27,12 @@ jobs:
           .\update_all.ps1
           if ( ! ( Select-String -Path .\Update-AUPackages.md -Pattern "0 updated," ) ) {
             .\update_readme.ps1
+            git config --local user.email "alim@forwardcomputers.com"
+            git config --local user.name "Ali Mustakim"
+            git add .
+            git diff-index --quiet HEAD || git commit -a -m "github actions update [skip ci]"
+            git pull
+            git push origin
             $oauth_consumer_key = "$env:env_consumer_key"
             $oauth_consumer_secret = "$env:env_consumer_secret"
             $oauth_token = "$env:env_token"
