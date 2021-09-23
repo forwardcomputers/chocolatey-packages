@@ -30,7 +30,7 @@ jobs:
             git config --local user.email "alim@forwardcomputers.com"
             git config --local user.name "Ali Mustakim"
             git add .
-            git diff-index --quiet HEAD || git commit -a -m "github actions update [skip ci]"
+            git diff-index --quiet HEAD; if (-not $?) { git commit -a -m "github actions update [skip ci]" }
             git pull
             git push origin
             $oauth_consumer_key = "$env:env_consumer_key"
