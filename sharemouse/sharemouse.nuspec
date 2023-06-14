@@ -4,7 +4,7 @@
   <metadata>
     <!-- == PACKAGE SPECIFIC SECTION == -->
     <id>sharemouse</id>
-    <version>6.0.53</version>
+    <version>6.0.55</version>
     <packageSourceUrl>https://github.com/forwardcomputers/Chocolatey-packages/tree/main/automatic/sharemouse</packageSourceUrl>
     <owners>forwardcomputers</owners>
     <!-- == SOFTWARE SPECIFIC SECTION == -->
