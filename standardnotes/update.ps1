@@ -1,6 +1,6 @@
 import-module au
 
-$repoUri = 'https://api.github.com/repos/standardnotes/desktop/releases/latest'
+$repoUri = 'https://api.github.com/repos/standardnotes/app/releases/latest'
 
 function global:au_GetLatest {
     $repoPage               = Invoke-RestMethod -Method GET -Uri $repoUri -UseBasicParsing
