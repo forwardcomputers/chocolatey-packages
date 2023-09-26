@@ -24,7 +24,7 @@ jobs:
           env_token_secret: ${{ secrets.LP_T_OAUTH_SECRET }}
         run: |
           Install-Module au -Confirm:$false -Force
-          .\update_all.ps1
+          updateall
           if ( ! ( Select-String -Path .\Update-AUPackages.md -Pattern "0 updated," ) ) {
             .\update_readme.ps1
             git config --local user.email "alim@forwardcomputers.com"
