@@ -5,7 +5,7 @@ $repoUri = 'https://api.github.com/repos/standardnotes/app/releases/latest'
 function global:au_GetLatest {
     $repoPage               = Invoke-RestMethod -Method GET -Uri $repoUri -UseBasicParsing
     # $releaseVersion         = ( ( $repoPage ).tag_name ).substring( 1 )
-    $releaseVersion         = ( ( $repoPage ).tag_name ).split("@")[-1]
+    $releaseVersion         = ( ( $repoPage ).tag_name ).split( "@" )[ -1 ]
     $releaseUrl64           = ( ( $repoPage ).assets | Where-Object name -like "*win.exe" ).browser_download_url
     $releaseUrlchecksum64   = ( ( $repoPage ).assets | Where-Object name -like "*SHA256SUMS" ).browser_download_url
     $checksumPage           = Invoke-RestMethod -Method GET -Uri $releaseUrlchecksum64 -UseBasicParsing
