@@ -4,13 +4,15 @@
     <metadata>
         <!-- == PACKAGE SPECIFIC SECTION == -->
         <id>standardnotes</id>
-        <version>3.173.4</version>
+        <version>1</version>
         <packageSourceUrl>https://github.com/forwardcomputers/Chocolatey-packages/tree/main/standardnotes</packageSourceUrl>
         <owners>forwardcomputers</owners>
         <!-- == SOFTWARE SPECIFIC SECTION == -->
         <title>Standard Notes</title>
         <authors>Standard Notes Ltd.</authors>
         <projectUrl>https://standardnotes.com</projectUrl>
+        <repoOwner>standardnotes</repoOwner>
+        <repoApp>app</repoApp>
         <projectSourceUrl>https://github.com/standardnotes/app</projectSourceUrl>
         <iconUrl>https://raw.githubusercontent.com/standardnotes/app/main/packages/desktop/build/icon/Icon-512x512.png</iconUrl>
         <releaseNotes>https://github.com/standardnotes/app/releases/latest</releaseNotes>
@@ -31,6 +33,7 @@ Store all your confidential notes and files in one secure place and seamlessly a
 ]]></description>
     </metadata>
     <files>
+        <file src="legal\**" target="legal" />
         <file src="tools\**" target="tools" />
     </files>
 </package>
