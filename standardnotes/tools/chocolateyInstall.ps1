@@ -1,7 +1,7 @@
 ﻿$ErrorActionPreference = 'Stop'
 
 $packageName = $env:ChocolateyPackageName
-$version = '3.173.4'
+$version = '3.170.4'
 
 $installedVersion = Get-ItemPropertyValue -path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\774f2290-3906-58eb-baae-35b0dc01c31f" -Name "DisplayVersion" -ErrorAction SilentlyContinue
 if ( $version -eq $installedVersion ) {
