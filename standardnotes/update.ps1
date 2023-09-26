@@ -6,7 +6,7 @@ $repoApp    = $nuspecInfo.repoApp
 $licenseUrl = $nuspecInfo.licenseUrl
 
 function global:au_GetLatest {
-    $repoPage               = Get-GitHubRelease -OwnerName "$repoOwner" -RepositoryName "$repoApp" -Latest
+    $repoPage               = Get-GitHubRelease $repoOwner $repoApp
     $releaseVersion         = ( $repoPage.tag_name ).split( "@" )[ -1 ]
     $releaseUrl64           = ( $repoPage.assets | Where-Object name -like "*win.exe" ).browser_download_url
     $releaseUrlchecksum64   = ( $repoPage.assets | Where-Object name -like "*SHA256SUMS" ).browser_download_url

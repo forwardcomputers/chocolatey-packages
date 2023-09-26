@@ -103,6 +103,7 @@ $Options = [ordered]@{
     # UpdateIconScript          = "$PSScriptRoot\scripts\Update-IconUrl.ps1"
     UpdatePackageSourceScript = "$PSScriptRoot\scripts\Update-PackageSourceUrl.ps1"
     ModulePaths               = @("$PSScriptRoot\scripts\au_extensions.psm1"; "Wormies-AU-Helpers")
+
     BeforeEach = {
         param($PackageName, $Options )
         $Options.ModulePaths | ForEach-Object { Import-Module $_ }
