@@ -1,6 +1,6 @@
 import-module au
 
-$nuspecInfo  = ( [xml] ( Get-Content .\$packageName.nuspec ) ).package.metadata
+$nuspecInfo  = ( [xml] ( Get-Content ".\$packageName.nuspec" ) ).package.metadata
 $repoOwner   = $nuspecInfo.repoOwner
 $repoApp     = $nuspecInfo.repoApp
 $licenseUrl  = $nuspecInfo.licenseUrl
@@ -38,7 +38,7 @@ function global:au_SearchReplace {
  }
 
  function global:au_AfterUpdate($Package) {
-    Invoke-WebRequest $licenseUrl -OutFile .\legal\LICENSE.txt
+    Invoke-WebRequest $licenseUrl -OutFile ".\legal\LICENSE.txt"
 }
 
 update -ChecksumFor none
