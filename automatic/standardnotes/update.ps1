@@ -1,8 +1,9 @@
 import-module au
 
+dir
+Write-Host $packageName
 $nuspecInfo  = ( [xml] ( Get-Content ".\$packageName.nuspec" ) ).package.metadata
-$nuspecInfo | Out-File -FilePath q1
-type q1
+Write-Host $nuspecInfo
 $repoOwner   = $nuspecInfo.repoOwner
 $repoApp     = $nuspecInfo.repoApp
 $licenseUrl  = $nuspecInfo.licenseUrl
