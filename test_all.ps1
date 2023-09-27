@@ -1,6 +1,6 @@
 #Name can be 'random N' to randomly force the Nth group of packages.
 
-param( [string[]] $Name, [string] $Root = "$PSScriptRoot", [switch]$ThrowOnErrors )
+param( [string[]] $Name, [string] $Root = "$PSScriptRoot\automatic", [switch]$ThrowOnErrors )
 
 if (Test-Path $PSScriptRoot/update_vars.ps1) {
     . $PSScriptRoot/update_vars.ps1
@@ -72,7 +72,8 @@ $options = [ordered]@{
     ForcedPackages = $ForcedPackages -split ' '
     # UpdateIconScript          = "$PSScriptRoot\scripts\Update-IconUrl.ps1"
     UpdatePackageSourceScript = "$PSScriptRoot\scripts\Update-PackageSourceUrl.ps1"
-    ModulePaths               = @("$PSScriptRoot\scripts\au_extensions.psm1"; "Wormies-AU-Helpers")
+    ModulePaths               = @("$PSScriptRoot\scripts\au_extensions.psm1")
+    # ModulePaths               = @("$PSScriptRoot\scripts\au_extensions.psm1"; "Wormies-AU-Helpers")
 
     BeforeEach  = {
     #   param($PackageName, $Options )
