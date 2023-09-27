@@ -1,10 +1,8 @@
 # AU Packages Template: https://github.com/majkinetor/au-packages-template
 
-param([string[]] $Name, [string] $ForcedPackages, [string] $Root = "$PSScriptRoot\automatic")
+param([string[]] $Name, [string] $ForcedPackages, [string] $Root = $PSScriptRoot)
 
-if (Test-Path $PSScriptRoot/update_vars.ps1) {
-    . $PSScriptRoot/update_vars.ps1
-}
+if (Test-Path $PSScriptRoot/update_vars.ps1) { . $PSScriptRoot/update_vars.ps1 }
 
 $Options = [ordered]@{
     WhatIf        = $au_WhatIf                              #Whatif all packages
@@ -21,11 +19,6 @@ $Options = [ordered]@{
       'The operation has timed out'
       'Internal Server Error'
       'Service Temporarily Unavailable'
-      'The connection was closed unexpectedly.'
-      'package version already exists'
-      'already exists on a Simple OData Server'             # https://github.com/chocolatey/chocolatey.org/issues/613
-      'Conflict'
-      'A system shutdown has already been scheduled'        # https://gist.github.com/choco-bot/a14b1e5bfaf70839b338eb1ab7f8226f#wps-office-free
     )
     RepeatOn      = @(                                      #Error message parts on which to repeat package updater
       'Could not create SSL/TLS secure channel'             # https://github.com/chocolatey/chocolatey-coreteampackages/issues/718
@@ -37,7 +30,6 @@ $Options = [ordered]@{
       'Internal Server Error'
       'An exception occurred during a WebClient request'
       'remote session failed with an unexpected state'
-      'The connection was closed unexpectedly.'
     )
     #RepeatSleep   = 250                                    #How much to sleep between repeats in seconds, by default 0
     #RepeatCount   = 2                                      #How many times to repeat on errors, by default 1
@@ -100,20 +92,11 @@ $Options = [ordered]@{
            } else {}
 
     ForcedPackages = $ForcedPackages -split ' '
-    # UpdateIconScript          = "$PSScriptRoot\scripts\Update-IconUrl.ps1"
-    UpdatePackageSourceScript = "$PSScriptRoot\scripts\Update-PackageSourceUrl.ps1"
-    ModulePaths               = @("$PSScriptRoot\scripts\au_extensions.psm1")
-    # ModulePaths               = @("$PSScriptRoot\scripts\au_extensions.psm1"; "Wormies-AU-Helpers")
-
     BeforeEach = {
         param($PackageName, $Options )
-        $Options.ModulePaths | ForEach-Object { Import-Module $_ }
-        . $Options.UpdateIconScript $PackageName.ToLowerInvariant() -Quiet -ThrowErrorOnIconNotFound
-        . $Options.UpdatePackageSourceScript $PackageName.ToLowerInvariant() -Quiet
-        Expand-Aliases -Directory "$PWD"
 
         $pattern = "^${PackageName}(?:\\(?<stream>[^:]+))?(?:\:(?<version>.+))?$"
-        $p = $Options.ForcedPackages | Where-Object { $_ -match $pattern }
+        $p = $Options.ForcedPackages | ? { $_ -match $pattern }
         if (!$p) { return }
 
         $global:au_Force         = $true
@@ -122,10 +105,7 @@ $Options = [ordered]@{
     }
 }
 
-if ($ForcedPackages) {
-    Write-Host "FORCED PACKAGES: $ForcedPackages"
-}
-
+if ($ForcedPackages) { Write-Host "FORCED PACKAGES: $ForcedPackages" }
 $global:au_Root         = $Root          #Path to the AU packages
 $global:au_GalleryUrl   = ''             #URL to package gallery, leave empty for Chocolatey Gallery
 $global:info = updateall -Name $Name -Options $Options
