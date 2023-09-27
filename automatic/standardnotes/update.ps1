@@ -44,4 +44,4 @@ function global:au_SearchReplace {
     Invoke-WebRequest $licenseUrl -OutFile ".\legal\LICENSE.txt"
 }
 
-update -ChecksumFor none
+# update -ChecksumFor none
