@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if "Ω" doesn't appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <!-- == PACKAGE SPECIFIC SECTION == -->
+        <id>standardnotes</id>
+        <version>1.1</version>
+        <packageSourceUrl>https://github.com/USERNAME/REPOSITORY-NAME/tree/master/automatic/standardnotes</packageSourceUrl>
+        <owners>forwardcomputers</owners>
+        <!-- == SOFTWARE SPECIFIC SECTION == -->
+        <title>Standard Notes</title>
+        <authors>Standard Notes Ltd.</authors>
+        <projectUrl>https://standardnotes.com</projectUrl>
+        <repoOwner>standardnotes</repoOwner>
+        <repoApp>app</repoApp>
+        <projectSourceUrl>https://github.com/standardnotes/app</projectSourceUrl>
+        <iconUrl>https://raw.githubusercontent.com/standardnotes/app/main/packages/desktop/build/icon/Icon-512x512.png</iconUrl>
+        <releaseNotes>https://github.com/standardnotes/app/releases/latest</releaseNotes>
+        <docsUrl>https://standardnotes.com/help</docsUrl>
+        <mailingListUrl>https://github.com/standardnotes/forum/issues/</mailingListUrl>
+        <bugTrackerUrl>https://github.com/standardnotes/forum/issues/</bugTrackerUrl>
+        <copyright>standardnotes.com</copyright>
+        <licenseUrl>https://raw.githubusercontent.com/standardnotes/app/main/LICENSE</licenseUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <tags>standardnotes notes private encryption sync FOSS embedded</tags>
+        <summary>Think fearlessly with end-to-end encrypted notes and files</summary>
+        <description><![CDATA[
+A steel vault for your most sensitive data.
+
+Standard Notes is a secure digital notebook that protects your notes and files with 4x-audited, industry-leading end-to-end encryption, meaning only you have access to the keys required to decrypt your information.
+
+Store all your confidential notes and files in one secure place and seamlessly access them across all your devices, resting assured your data is always protected by the highest security standards.
+]]></description>
+    </metadata>
+    <files>
+        <file src="legal\**" target="legal" />
+        <file src="tools\**" target="tools" />
+    </files>
+</package>
