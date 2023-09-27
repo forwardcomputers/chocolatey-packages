@@ -73,7 +73,8 @@ jobs:
             $oauth_auth_params.GetEnumerator() | sort name | foreach { $oauth_auth_string += $_.Key + '="' + [System.Uri]::EscapeDataString($_.Value) + '", ' }
             $oauth_auth_string = $oauth_auth_string.TrimEnd(', ')
             $tweet_body = "status=$tweet_message"
-            Invoke-RestMethod -SkipHttpErrorCheck -URI $http_endpoint -Method Post -Body $tweet_body -Headers @{ 'Authorization' = $oauth_auth_string } -ContentType "application/x-www-form-urlencoded"
+            $ErrorActionPreference = 'SilentlyContinue'
+            Invoke-RestMethod -URI $http_endpoint -Method Post -Body $tweet_body -Headers @{ 'Authorization' = $oauth_auth_string } -ContentType "application/x-www-form-urlencoded"
             .\update_readme.ps1
             icacls . /t /grant "Everyone:(OI)(CI)F"
           }
