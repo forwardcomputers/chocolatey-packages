@@ -6,7 +6,7 @@ in verifying that this package's contents are trustworthy.
 Package can be verified by doing the following:
 
 1. Download the installer, go to.
-   64-Bit software: <https://github.com/standardnotes/app/releases/download/%40standardnotes/desktop%403.173.4/standard-notes-3.173.4-win.exe>
+   64-Bit software: https://github.com/standardnotes/app/releases/download/%40standardnotes/desktop%403.173.4/standard-notes-3.173.4-win.exe
 
 2. Get the checksum using one of the following methods:
    - Use powershell function 'Get-FileHash'
