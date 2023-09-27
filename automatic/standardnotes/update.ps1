@@ -1,10 +1,6 @@
 import-module au
 
-$_packageName = Split-Path -Leaf $PSScriptRoot
-Write-Output $_packageName
-$_q2 = $env:ChocolateyPackageName
-Write-Output $_q2
-$nuspecInfo  = ( [xml] ( Get-Content .\standardnotes.nuspec ) ).package.metadata
+$nuspecInfo  = ( [xml] ( Get-Content .\$packageName.nuspec ) ).package.metadata
 $repoOwner   = $nuspecInfo.repoOwner
 $repoApp     = $nuspecInfo.repoApp
 $licenseUrl  = $nuspecInfo.licenseUrl
