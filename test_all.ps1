@@ -47,25 +47,24 @@ $options = [ordered]@{
     RepeatSleep   = 60                                      #How much to sleep between repeats in seconds, by default 0
     RepeatCount   = 2                                       #How many times to repeat on errors, by default 1
 
-    Report = @{
-        Type = 'markdown'                                   #Report type: markdown or text
-        Path = "$PSScriptRoot\Update-Force-Test-${n}.md"    #Path where to save the report
-        Params= @{                                          #Report parameters:
-            Github_UserRepo = $Env:github_user_repo         #  Markdown: shows user info in upper right corner
-            NoAppVeyor  = $true                             #  Markdown: do not show AppVeyor build shield
-            Title       = "Update Force Test - Group ${n}"
-            UserMessage = "[Ignored](#ignored) | [Update report](https://gist.github.com/$Env:gist_id)"       #  Markdown, Text: Custom user message to show
-        }
-    }
+    # Report = @{
+    #     Type = 'markdown'                                   #Report type: markdown or text
+    #     Path = "$PSScriptRoot\Update-Force-Test-${n}.md"    #Path where to save the report
+    #     Params= @{                                          #Report parameters:
+    #         Github_UserRepo = $Env:github_user_repo         #  Markdown: shows user info in upper right corner
+    #         NoAppVeyor  = $true                             #  Markdown: do not show AppVeyor build shield
+    #         Title       = "Update Force Test - Group ${n}"
+    #         UserMessage = "[Ignored](#ignored) | [Update report](https://gist.github.com/$Env:gist_id)"       #  Markdown, Text: Custom user message to show
+    #     }
+    # }
 
-    Gist = @{
-        Id     = $Env:gist_id_test                          #Your gist id; leave empty for new private or anonymous gist
-        ApiKey = $Env:github_api_key                        #Your github api key - if empty anoymous gist is created
-        Path   = "$PSScriptRoot\Update-Force-Test-${n}.md"  #List of files to add to the gist
-        Description = "Update Force Test Report #powershell #chocolatey"
-    }
+    # Gist = @{
+    #     Id     = $Env:gist_id_test                          #Your gist id; leave empty for new private or anonymous gist
+    #     ApiKey = $Env:github_api_key                        #Your github api key - if empty anoymous gist is created
+    #     Path   = "$PSScriptRoot\Update-Force-Test-${n}.md"  #List of files to add to the gist
+    #     Description = "Update Force Test Report #powershell #chocolatey"
+    # }
 }
-
 
 $global:info = updateall -Name $Name -Options $Options
 
