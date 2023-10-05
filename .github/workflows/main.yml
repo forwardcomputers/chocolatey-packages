@@ -14,8 +14,27 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
-      - name: run update_all
+        uses: actions/checkout@v4
+      - name: run update_all_packages
+        shell: powershell
+        run: |
+          echo "_update=false" >> $env:GITHUB_ENV
+          Install-Module au -Confirm:$false -Force
+          .\update_all.ps1
+          if ( ! ( Select-String -Path .\Update-AUPackages.md -Pattern "0 updated," ) ) {
+            git config --local user.email "alim@forwardcomputers.com"
+            git config --local user.name "Ali Mustakim"
+            git add .
+            git diff-index --quiet HEAD; if (-not $?) { git commit -a -m "github actions update [skip ci]" }
+            git pull
+            git push origin
+            .\update_readme.ps1
+            icacls . /t /grant "Everyone:(OI)(CI)F" | out-null
+            echo "_update=true" >> $env:GITHUB_ENV
+          }
+
+      - name: tweet on success
+        if: env._update
         shell: powershell
         env:
           env_consumer_key: ${{ secrets.LP_T_CONSUMER_KEY }}
@@ -23,25 +42,10 @@ jobs:
           env_token: ${{ secrets.LP_T_OAUTH_TOKEN }}
           env_token_secret: ${{ secrets.LP_T_OAUTH_SECRET }}
         run: |
-          Install-Module au -Confirm:$false -Force
-          .\update_all.ps1
-          if ( ! ( Select-String -Path .\Update-AUPackages.md -Pattern "0 updated," ) ) {
-            .\update_readme.ps1
-            git config --local user.email "alim@forwardcomputers.com"
-            git config --local user.name "Ali Mustakim"
-            git add .
-            git diff-index --quiet HEAD; if (-not $?) { git commit -a -m "github actions update [skip ci]" }
-            git pull
-            git push origin
             $oauth_consumer_key = "$env:env_consumer_key"
             $oauth_consumer_secret = "$env:env_consumer_secret"
             $oauth_token = "$env:env_token"
             $oauth_token_secret = "$env:env_token_secret"
-            Write-Host "Hos Key = $oauth_consumer_key"
-            Write-Output "Out Key = $oauth_consumer_key"
-            Write-Debug "Deb Key = $oauth_consumer_key"
-            Write-Information "Info Key = $oauth_consumer_key"
-            Write-Verbose "Ver Key = $oauth_consumer_key"
             $tweet_message = 'Chocolatey local packages updated'
             $http_endpoint = 'https://api.twitter.com/1.1/statuses/update.json'
             $oauth_nonce = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes([System.DateTime]::Now.Ticks.ToString()))
@@ -75,6 +79,4 @@ jobs:
             $tweet_body = "status=$tweet_message"
             $ErrorActionPreference = 'SilentlyContinue'
             Invoke-RestMethod -URI $http_endpoint -Method Post -Body $tweet_body -Headers @{ 'Authorization' = $oauth_auth_string } -ContentType "application/x-www-form-urlencoded"
-            .\update_readme.ps1
-            icacls . /t /grant "Everyone:(OI)(CI)F"
-          }
+            echo "Tweet sent"
