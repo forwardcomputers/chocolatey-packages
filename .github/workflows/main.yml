@@ -20,7 +20,7 @@ jobs:
         run: |
           echo "_update=false" >> $env:GITHUB_ENV
           Install-Module au -Confirm:$false -Force
-          .\update_all.ps1 > .\update_all.log
+          .\update_all.ps1 > .\update_all.log 2>&1
           if ( ! ( Select-String -Path .\update-all.log -Pattern "0 updated," ) ) {
             del .\update_all.log
             git config --local user.email "alim@forwardcomputers.com"
