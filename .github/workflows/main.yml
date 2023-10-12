@@ -20,8 +20,7 @@ jobs:
         run: |
           echo "_update=false" >> $env:GITHUB_ENV
           Install-Module au -Confirm:$false -Force
-          .\update_all.ps1 *>> .\update_all.log
-          type .\update_all.log
+          .\update_all.ps1 > .\update_all.log
           if ( ! ( Select-String -Path .\update_all.log -Pattern "0 updated," ) ) {
             del .\update_all.log
             git config --local user.email "alim@forwardcomputers.com"
@@ -34,10 +33,9 @@ jobs:
             icacls . /t /grant "Everyone:(OI)(CI)F" | out-null
             echo "_update=true" >> $env:GITHUB_ENV
           }
-          echo "${{ env._update }}"
 
       - name: tweet on success
-        if: env._update
+        if: env._update == 'true'
         shell: pwsh
         env:
           env_consumer_key: ${{ secrets.LP_T_CONSUMER_KEY }}
