@@ -22,6 +22,7 @@ jobs:
           Install-Module au -Confirm:$false -Force
           .\update_all.ps1 *>> .\update_all.log
           if ( ! ( Select-String -Path .\update_all.log -Pattern "0 updated," ) ) {
+            del .\update_all.log
             git config --local user.email "alim@forwardcomputers.com"
             git config --local user.name "Ali Mustakim"
             git add .
