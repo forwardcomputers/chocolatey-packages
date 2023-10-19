@@ -23,14 +23,14 @@ jobs:
           .\update_all.ps1 *>> .\update_all.log
           if ( ! ( Select-String -Path .\update_all.log -Pattern "0 updated," ) ) {
             del .\update_all.log
+            .\update_readme.ps1
+            icacls . /t /grant "Everyone:(OI)(CI)F" | out-null
             git config --local user.email "alim@forwardcomputers.com"
             git config --local user.name "Ali Mustakim"
             git add .
             git diff-index --quiet HEAD; if (-not $?) { git commit -a -m "github actions update [skip ci]" }
             git pull
             git push origin
-            .\update_readme.ps1
-            icacls . /t /grant "Everyone:(OI)(CI)F" | out-null
             echo "_update=true" >> $env:GITHUB_ENV
           }
 
