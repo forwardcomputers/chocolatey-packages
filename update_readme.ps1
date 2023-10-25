@@ -5,11 +5,11 @@ $timeUCT = ($content | Select-String -Pattern '^\**UTC\**: (.*?) \[').Matches.Gr
 $timeEST = [TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date -Date $timeUCT),'Eastern Standard Time').ToString('d--M--yyyy_hh:mm:ss_tt')
 
 $anchors = $content |
-Select-String -Pattern '^\s*\|<img src(.*?)\/>\|\[(.*?)\].*\[(.*?)\]' |
+Select-String -Pattern '(^\s*\|<img src(.*?)\/>\|)(\[(.*?)\].*?\[(.*?)\].*?\[(.*?)\])' |
 ForEach-Object {
     New-Object -TypeName PSObject -Property @{
-        Version = $_.Matches.Groups[3].Value
-        Name = $_.Matches.Groups[2].Value
+        Name = $_.Matches.Groups[4].Value
+        Version = $_.Matches.Groups[6].Value
     }
 }
 
@@ -24,6 +24,6 @@ $linesToWrite = @"
 Set-Content -Encoding ASCII -Force -Path README.md -Value $linesToWrite
 
 ForEach($anchor in $anchors) {
-    $linesToWrite = "| [![](https://img.shields.io/badge/$($anchor.Name)-grey.svg)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/automatic/$($anchor.Name)) | ![](https://img.shields.io/badge/$($timeEST)-blue.svg) | [![](https://img.shields.io/badge/github--grey.svg?label=&logo=github&logoColor=white)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/automatic/$($anchor.Name)) | | [![](https://img.shields.io/badge/v$($anchor.Version)-blue.svg)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/automatic/$($anchor.Name))"
+    $linesToWrite = "| [![](https://img.shields.io/badge/$($anchor.Name)-grey.svg)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name)) | ![](https://img.shields.io/badge/$($timeEST)-blue.svg) | [![](https://img.shields.io/badge/github--grey.svg?label=&logo=github&logoColor=white)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name)) | | [![](https://img.shields.io/badge/v$($anchor.Version)-blue.svg)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name))"
     Add-Content -Encoding ASCII -Force -Path README.md -Value $linesToWrite
 }
