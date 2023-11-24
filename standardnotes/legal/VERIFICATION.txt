@@ -6,7 +6,7 @@ in verifying that this package's contents are trustworthy.
 Package can be verified by doing the following:
 
 1. Download the installer, go to.
-   64-Bit software: https://github.com/standardnotes/app/releases/download/@standardnotes/desktop@3.181.29/standard-notes-3.181.29-win.exe
+   64-Bit software: https://github.com/standardnotes/app/releases/download/@standardnotes/desktop@3.181.32/standard-notes-3.181.32-win.exe
 
 2. Get the checksum using one of the following methods:
    - Use powershell function 'Get-FileHash'
@@ -14,6 +14,6 @@ Package can be verified by doing the following:
 
 3. The checksums should match the following:
    checksum type: sha265
-   checksum64: d076a8b9d4eed7ee7dbc6ba2261eff9611b2603f5a5cd34eb3ed5262400a5c00
+   checksum64: d63500c3c3a80b0ab74d36168a310377ffa1a4612c262ebe36de234822f8243e
 
 The file 'LICENSE.txt' has been obtained from <https://raw.githubusercontent.com/standardnotes/app/main/LICENSE>

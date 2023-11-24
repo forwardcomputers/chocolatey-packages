@@ -1,6 +1,6 @@
 ﻿$ErrorActionPreference = 'Stop'
 
-$version = '3.181.29'
+$version = '3.181.32'
 
 $installedVersion = Get-ItemPropertyValue -path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\774f2290-3906-58eb-baae-35b0dc01c31f' -Name 'DisplayVersion' -ErrorAction SilentlyContinue
 if ( $version -eq $installedVersion ) {
@@ -11,8 +11,8 @@ if ( $version -eq $installedVersion ) {
 $packageArgs = @{
    packageName      = $env:ChocolateyPackageName
    fileType         = 'EXE'
-   url64bit         = 'https://github.com/standardnotes/app/releases/download/@standardnotes/desktop@3.181.29/standard-notes-3.181.29-win.exe'
-   checksum64       = 'd076a8b9d4eed7ee7dbc6ba2261eff9611b2603f5a5cd34eb3ed5262400a5c00'
+   url64bit         = 'https://github.com/standardnotes/app/releases/download/@standardnotes/desktop@3.181.32/standard-notes-3.181.32-win.exe'
+   checksum64       = 'd63500c3c3a80b0ab74d36168a310377ffa1a4612c262ebe36de234822f8243e'
    checksumType64   = 'sha265'
    softwareName     = 'Standard Notes*'
    silentArgs       = '/S'
