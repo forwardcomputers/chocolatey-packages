@@ -19,11 +19,11 @@ $linesToWrite = @"
 ---
 | Repository | Status | GitHub | Docker | Tag | Size | Layers |
 | --- | --- | :---: | :---: | :--- | :---: | :---: |
-| [![](https://img.shields.io/badge/chocolatey-packages-grey.svg)](https://github.com/forwardcomputers/chocolatey-packages) | [![](img.shields.io/github/actions/workflow/status/forwardcomputers/dockerfiles/build_all?label)](https://github.com/forwardcomputers/dockerfiles/actions) | [![](https://img.shields.io/badge/github--grey.svg?label=&logo=github&logoColor=white)](https://github.com/forwardcomputers/chocolatey-packages) | |
+| [![](https://img.shields.io/badge/chocolatey-packages-grey)](https://github.com/forwardcomputers/chocolatey-packages) | [![](https://img.shields.io/github/actions/workflow/status/forwardcomputers/chocolatey-packages/main.yml?label)](https://github.com/forwardcomputers/chocolatey-packages/actions) | [![](https://img.shields.io/badge/github--grey?label=&logo=github&logoColor=white)](https://github.com/forwardcomputers/chocolatey-packages) | |
 "@
 Set-Content -Encoding ASCII -Force -Path README.md -Value $linesToWrite
 
 ForEach($anchor in $anchors) {
-    $linesToWrite = "| [![](https://img.shields.io/badge/$($anchor.Name)-grey.svg)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name)) | ![](https://img.shields.io/badge/$($timeEST)-blue.svg) | [![](https://img.shields.io/badge/github--grey.svg?label=&logo=github&logoColor=white)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name)) | | [![](https://img.shields.io/badge/v$($anchor.Version)-blue.svg)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name))"
+    $linesToWrite = "| [![](https://img.shields.io/badge/$($anchor.Name)-grey)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name)) | ![](https://img.shields.io/badge/$($timeEST)-blue) | [![](https://img.shields.io/badge/github--grey?label=&logo=github&logoColor=white)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name)) | | [![](https://img.shields.io/badge/v$($anchor.Version)-blue)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name))"
     Add-Content -Encoding ASCII -Force -Path README.md -Value $linesToWrite
 }
