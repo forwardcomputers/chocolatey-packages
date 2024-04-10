@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if "Ω" doesn't appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <!-- == PACKAGE SPECIFIC SECTION == -->
+        <id>microsoftuixaml</id>
+        <version>1</version>
+        <packageSourceUrl>https://github.com/USERNAME/REPOSITORY-NAME/tree/master/automatic/microsoftuixaml</packageSourceUrl>
+        <owners>forwardcomputers</owners>
+        <!-- == SOFTWARE SPECIFIC SECTION == -->
+        <title>Windows UI Library</title>
+        <authors>Microsoft Corporation</authors>
+        <projectUrl>https://github.com/microsoft/microsoft-ui-xaml</projectUrl>
+        <projectSourceUrl>https://github.com/microsoft/microsoft-ui-xaml</projectSourceUrl>
+        <iconUrl>https://raw.githubusercontent.com/microsoft/microsoft-ui-xaml/main/docs/winui-logo-64x64.png</iconUrl>
+        <releaseNotes>https://github.com/microsoft/microsoft-ui-xaml/releases/latest</releaseNotes>
+        <docsUrl>https://github.com/microsoft/microsoft-ui-xaml/tree/main/docs</docsUrl>
+        <mailingListUrl>https://github.com/microsoft/microsoft-ui-xaml/issues/</mailingListUrl>
+        <bugTrackerUrl>https://github.com/microsoft/microsoft-ui-xaml/issues/</bugTrackerUrl>
+        <copyright>microsoft.com</copyright>
+        <licenseUrl>https://raw.githubusercontent.com/microsoft/microsoft-ui-xaml/main/LICENSE</licenseUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <tags>microsoft-ui-xaml xaml</tags>
+        <summary>WinUI is a user interface layer that contains modern controls and styles for building Windows apps. As the native UI layer in Windows it embodies Fluent Design, giving each Windows app the polished feel that customers expect.</summary>
+        <description><![CDATA[
+WinUI is a user interface layer that contains modern controls and styles for building Windows apps. As the native UI layer in Windows it embodies Fluent Design, giving each Windows app the polished feel that customers expect.
+]]></description>
+    </metadata>
+    <files>
+        <file src="legal\**" target="legal" />
+        <file src="tools\**" target="tools" />
+    </files>
+</package>

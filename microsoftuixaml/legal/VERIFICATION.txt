@@ -1,0 +1,11 @@
+VERIFICATION
+
+Verification is intended to assist the Chocolatey moderators and community
+in verifying that this package's contents are trustworthy.
+
+Package can be verified by doing the following:
+
+1. Download the installer, go to.
+   64-Bit software: https://github.com/standardnotes/app/releases/download/@standardnotes/desktop@3.192.4/standard-notes-3.192.4-win.exe
+
+The file 'LICENSE.txt' has been obtained from <https://raw.githubusercontent.com/standardnotes/app/main/LICENSE>
