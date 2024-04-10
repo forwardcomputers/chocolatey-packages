@@ -4,7 +4,7 @@
     <metadata>
         <!-- == PACKAGE SPECIFIC SECTION == -->
         <id>standardnotes</id>
-        <version>3.192.13</version>
+        <version>3.192.13.20240410</version>
         <packageSourceUrl>https://github.com/USERNAME/REPOSITORY-NAME/tree/master/automatic/standardnotes</packageSourceUrl>
         <owners>forwardcomputers</owners>
         <!-- == SOFTWARE SPECIFIC SECTION == -->
