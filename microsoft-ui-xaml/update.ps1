@@ -1,11 +1,13 @@
 import-module au
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1"
+
 Add-Type -AssemblyName System.Web
 
 $_pkgName   = Split-Path -Leaf $PSScriptRoot
 $nuspecInfo = ( [xml] ( Get-Content ".\$_pkgName.nuspec" ) ).package.metadata
 $repoOwner  = ( $nuspecInfo.projectSourceUrl ).split( '/' )[ -2 ]
 $repoApp    = ( $nuspecInfo.projectSourceUrl ).split( '/' )[ -1 ]
-$repoUri    = [System.Web.HttpUtility]::UrlDecode( "https://api.github.com/repos/$repoOwner/terminal/releases/latest" )
+$repoUri    = [System.Web.HttpUtility]::UrlDecode( "https://github.com/$repoOwner/terminal/raw/main/build/config/template.appinstaller" )
 $licenseUrl = $nuspecInfo.licenseUrl
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 
@@ -17,21 +19,17 @@ function global:au_SearchReplace {
         }
         ".\tools\chocolateyInstall.ps1" = @{
             "(?i)(^[$]version\s*=\s*)('.*')"            = "`${1}'$($Latest.Version)'"
-            "(?i)(^\s*url64bit\s*=\s*)('.*')"           = "`${1}'$($Latest.URL64)'"
+            "(?i)(^[$]url64bit\s*=\s*)('.*')"           = "`${1}'$($Latest.URL64)'"
        }
     }
 }
 
 function global:au_GetLatest {
-    $repoPage             = Invoke-RestMethod -Method GET -Uri $repoUri -UseBasicParsing
-    $releaseUrl64         = [System.Web.HttpUtility]::UrlDecode( ( $repoPage.assets | Where-Object name -like '*PreinstallKit.zip' ).browser_download_url )
+    [xml]$xamlPage = ( New-Object System.Net.WebClient ).DownloadString( $repoUri )
+    $releaseVersion = ( $xamlPage.AppInstaller.Dependencies.ChildNodes | Where-Object { $_.ProcessorArchitecture -eq "x64" } ).name.trimstart( "Microsoft.UI.Xaml." )
+    $releaseUrl64 = ( $xamlPage.AppInstaller.Dependencies.ChildNodes | Where-Object { $_.ProcessorArchitecture -eq "x64" } ).Uri
 
-    Get-ChocolateyWebFile -PackageName $_pkgName -FileFullPath "$toolsDir\$_pkgName.zip" -Url $releaseUrl64
-    Get-ChocolateyUnzip -FileFullPath "$toolsDir\$_pkgName.zip" -Destination $toolsDir
-
-    $releaseVersion       = ( Get-Item "$toolsDir\*x64*" ).Name -replace '.*UI.Xaml.(.*?)_.*','$1'
-
-    @{ 
+    return @{ 
       Version        = $releaseVersion
       URL64          = $releaseUrl64
    }
