@@ -5,8 +5,9 @@ $_pkgName   = Split-Path -Leaf $PSScriptRoot
 $nuspecInfo = ( [xml] ( Get-Content ".\$_pkgName.nuspec" ) ).package.metadata
 $repoOwner  = ( $nuspecInfo.projectSourceUrl ).split( '/' )[ -2 ]
 $repoApp    = ( $nuspecInfo.projectSourceUrl ).split( '/' )[ -1 ]
-$repoUri    = [System.Web.HttpUtility]::UrlDecode( "https://api.github.com/repos/$repoOwner/$repoApp/releases/latest" )
+$repoUri    = [System.Web.HttpUtility]::UrlDecode( "https://api.github.com/repos/$repoOwner/terminal/releases/latest" )
 $licenseUrl = $nuspecInfo.licenseUrl
+$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 
 function global:au_SearchReplace {
     @{
@@ -23,10 +24,14 @@ function global:au_SearchReplace {
 
 function global:au_GetLatest {
     $repoPage             = Invoke-RestMethod -Method GET -Uri $repoUri -UseBasicParsing
-    $releaseVersion       = ( $repoPage.tag_name ).split( '@' )[ -1 ]
     $releaseUrl64         = [System.Web.HttpUtility]::UrlDecode( ( $repoPage.assets | Where-Object name -like '*PreinstallKit.zip' ).browser_download_url )
 
-   @{ 
+    Get-ChocolateyWebFile -PackageName $_pkgName -FileFullPath "$toolsDir\$_pkgName.zip" -Url $releaseUrl64
+    Get-ChocolateyUnzip -FileFullPath "$toolsDir\$_pkgName.zip" -Destination $toolsDir
+
+    $releaseVersion       = ( Get-Item "$toolsDir\*x64*" ).Name -replace '.*UI.Xaml.(.*?)_.*','$1'
+
+    @{ 
       Version        = $releaseVersion
       URL64          = $releaseUrl64
    }
