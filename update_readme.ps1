@@ -24,7 +24,7 @@ $linesToWrite = @"
 Set-Content -Encoding ASCII -Force -Path README.md -Value $linesToWrite
 
 ForEach($anchor in $anchors) {
-    $newName=$($anchor.Name).Normalize("FormD") -replace '-', '_'
+    $newName=$($anchor.Name).Normalize("FormD") -replace '-', '--'
     $linesToWrite = "| [![](https://img.shields.io/badge/$newName-grey)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name)) | ![](https://img.shields.io/badge/$($timeEST)-blue) | [![](https://img.shields.io/badge/github--grey?label=&logo=github&logoColor=white)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name)) | | [![](https://img.shields.io/badge/v$($anchor.Version)-blue)](https://github.com/forwardcomputers/chocolatey-packages/tree/main/$($anchor.Name))"
     Add-Content -Encoding ASCII -Force -Path README.md -Value $linesToWrite
 }
