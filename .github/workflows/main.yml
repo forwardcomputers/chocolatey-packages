@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-  schedule:
-    # Times are in UTC, this job is run daily @ 10HRS = 5AM EST
-    - cron: "0 10 * * *"
+#  schedule:
+#    # Times are in UTC, this job is run daily @ 10HRS = 5AM EST
+#    - cron: "0 10 * * *"
 
   workflow_dispatch:
 
